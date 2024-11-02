@@ -1,9 +1,7 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { addDoc, collection, getFirestore } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDLZf9gdelSwm9es_Y9Efx0XrTX0SV1hAM",
     authDomain: "weaklyplan-tow.firebaseapp.com",
@@ -62,11 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            // إعداد مرجع المستند (document reference)
-            const docRef = doc(db, collectionName, subject);
-
-            // تعيين البيانات في Firestore
-            await setDoc(docRef, data, { merge: true }); // استخدام merge لتحديث البيانات في حال وجودها
+            // إضافة وثيقة جديدة بمعرف فريد
+            await addDoc(collection(db, collectionName), data);
 
             Swal.fire({
                 title: 'نجاح!',
